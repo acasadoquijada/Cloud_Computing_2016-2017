@@ -10,4 +10,4 @@ Este proyecto consiste en el despliegue de una aplicación web desarrollada util
 
 ## Ejercicios
 
-Los ejercicios se encuentran en el siguiente [enlace](ejercicios)
+Los ejercicios se encuentran en el siguiente [enlace](ejercicios.md)
