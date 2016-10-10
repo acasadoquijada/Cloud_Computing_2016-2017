@@ -1,5 +1,5 @@
 ---
-layout: index
+layout: ejercicios
 ---
 
 Probando fichero de ejercicios
