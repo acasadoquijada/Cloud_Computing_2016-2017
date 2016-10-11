@@ -2,11 +2,11 @@
 layout: ejercicios
 ---
 
-#Ejercicios tema 1
+# Ejercicios tema 1
 
-##Ejercicio 1
+## Ejercicio 1
 
-###Instalar alguno de los entornos virtuales de node.js y, con ellos, instalar la última versión existente, la versión minor más actual de la 0.12 y lo mismo para la 0.11 o alguna impar. Si no se usa habitualmente este lenguaje, hacer lo mismo con cualquier otro lenguaje de scripting.
+### Instalar alguno de los entornos virtuales de node.js y, con ellos, instalar la última versión existente, la versión minor más actual de la 0.12 y lo mismo para la 0.11 o alguna impar. Si no se usa habitualmente este lenguaje, hacer lo mismo con cualquier otro lenguaje de scripting.
 
 He instalado el entorno de python [Virtualenv](https://virtualenv.pypa.io/en/latest/)
 
@@ -18,22 +18,22 @@ Una vez instalado creamos un entorno virtual usando `virtualenv mi-entorno` y pa
 
 
 
-##Ejercicio 2
+## Ejercicio 2
 
-###Como ejercicio, algo ligeramente diferente: una web para calificar las empresas en las que hacen prácticas los alumnos. Las acciones serían crear empresa y listar calificaciones para cada empresa, crear calificación y añadirla (comprobando que la persona no la haya añadido ya), borrar calificación (si se arrepiente o te denuncia la empresa o algo) y hacer un ránking de empresas por calificación, por ejemplo. Crear un repositorio en GitHub para la librería y crear un pequeño programa que use algunas de sus funcionalidades. Si se quiere hacer con cualquier otra aplicación, también es válido
+### Como ejercicio, algo ligeramente diferente: una web para calificar las empresas en las que hacen prácticas los alumnos. Las acciones serían crear empresa y listar calificaciones para cada empresa, crear calificación y añadirla (comprobando que la persona no la haya añadido ya), borrar calificación (si se arrepiente o te denuncia la empresa o algo) y hacer un ránking de empresas por calificación, por ejemplo. Crear un repositorio en GitHub para la librería y crear un pequeño programa que use algunas de sus funcionalidades. Si se quiere hacer con cualquier otra aplicación, también es válido
 
 Para realizar la aplicación he usado [Django](https://www.djangoproject.com/), consiste en una web en la que se puede crear encuestas, con 3 opciones cada una, votar seleccionando una de esas tres opciones y eliminar encuestas, se encuentra en este [repositorio](https://github.com/acasadoquijada/Aplicacion-Encuestas)
 
 
-##Ejercicio 3
+## Ejercicio 3
 
-###Ejecutar el programa en diferentes versiones del lenguaje. ¿Funciona en todas ellas?
+### Ejecutar el programa en diferentes versiones del lenguaje. ¿Funciona en todas ellas?
 
 ![ejercicio3.png](http://i1045.photobucket.com/albums/b460/Alejandro_Casado/Tema2/ejercicio3_zpskk9oefsz.png)
 
-##Ejercicio 4
+## Ejercicio 4
 
-###Crear una descripción del módulo usando package.json. En caso de que se trate de otro lenguaje, usar el método correspondiente.
+### Crear una descripción del módulo usando package.json. En caso de que se trate de otro lenguaje, usar el método correspondiente.
 
 El equivalente en python es [setup.py](http://python-packaging.readthedocs.org/en/latest/minimal.html).
 
@@ -53,17 +53,17 @@ setup(name='pollaplication',
       zip_safe=False)
 ~~~
 
-##Ejercicio 5
+## Ejercicio 5
 
-###Automatizar con grunt y docco (o algún otro sistema) la generación de documentación de la librería que se cree. Previamente, por supuesto, habrá que documentar tal librería.
+### Automatizar con grunt y docco (o algún otro sistema) la generación de documentación de la librería que se cree. Previamente, por supuesto, habrá que documentar tal librería.
 
 Una opción para generar la documentación en python es [epydoc](http://epydoc.sourceforge.net/), en su web aparecen distintas formas de instalarlo.
 
 Una vez instalado podemos usarlo del siguiente método `epydoc nuestro-paquete`, el resultado de esta operación es un directorio llamado `html`, dentro de él hay un `index.html` mediante el cual accederremos a la documentación
 
-##Ejercicio 6
+## Ejercicio 6
 
-###Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
+### Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
 
 Para este ejercicio he realizado un test en el que creamos una encuesta junto a 3 respuestas.
 
@@ -128,9 +128,9 @@ Tras la correción comprobamos que los test se pasan satisfactoriamente
 ![ejercicio6-3](http://i1045.photobucket.com/albums/b460/Alejandro_Casado/Tema2/ejercicio6-3_zps19fjetmq.png)
 
 
-##Ejercicio 7
+## Ejercicio 7
 
-###Convertir los tests unitarios anteriores con assert a programas de test y ejecutarlos desde mocha, usando descripciones del test y del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
+### Convertir los tests unitarios anteriores con assert a programas de test y ejecutarlos desde mocha, usando descripciones del test y del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
 
 En el caso de django disponemos de un fichero `test.py` en el que podemos definir todos los test convenientes. Este fichero nos indica información sobre cada uno de los test, como los que se han realizado correctamente
 
@@ -173,9 +173,9 @@ class QuestionMethodTests(TestCase):
 		self.assertEqual(future_question.was_published_recently(), False)
 ~~~	
 
-##Ejercicio 8
+## Ejercicio 8
 
-###Haced los dos primeros pasos antes de pasar al tercero. Configurar integración continua para nuestra aplicación usando Travis o algún otro sitio.
+### Haced los dos primeros pasos antes de pasar al tercero. Configurar integración continua para nuestra aplicación usando Travis o algún otro sitio.
 
 Lo primero que debemos hacer tras darnos de alta en Travis es crear un fichero llamado .travis.yml, lo situaremos en el directorio raíz, este fichero es necesario para la integración continua.
 
