@@ -2,7 +2,7 @@
 layout: index
 ---
 
-# MyAcademicBot
+# MyStudentBot
 
 ## Introducción
 
