@@ -19,7 +19,7 @@ El objetivo de este bot es apoyar al estudiante universitario ayudándole con su
 
 Para la arquitectura se ha elegido una basada en microservicios. Estos microservicios son independientes entre ellos y pueden ser desarrollados, desplegados y testeados de manera indiviual.
 
-La idea es que el bot funcionará como API, atendiendo al esquema general de microservicios, y hará uso de los distintos microservicios implementados según las peticiones del usuario.
+La idea es que el bot funcionará como API, atendiendo al esquema general de microservicios, y hará uso de los distintos microservicios implementados según las peticiones del usuario. Básicamente el usuario le hablará al bot y este dependiendo de lo que haya escrito el usuario utilizará un microservicio u otro.
 
 
 ### Microservicios
