@@ -40,3 +40,9 @@ La idea de este microservicio es que sea lo mas flexible posible, es decir, el u
 #### Gestión de gastos.
 
 Como es natural, un estudiante universitario tiene muchos gastos. El objetivo de este microservicio es llevar un registro de lo gastado por el usuario a lo largo de un periodo de tiempo, 1 mes por ejemplo, y representar dichos gastos utilizando una serie de gráficos a elección del usuario. También será posible comparar los gastos con los de los meses anteriores. El usuario escribiría al bot diciendo: "Bus 5€ semana", el bot se pondría en contacto con este microservicio y los datos quedarían almacenados. Este microservicio tambíen se encarga de la creación de los gráficos comentandos anteriormente y de su envio al bot cuando este lo precise.
+
+### Licencia
+
+La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
+
+
