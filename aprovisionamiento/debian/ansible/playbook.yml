@@ -1,0 +1,19 @@
+- hosts: all
+  sudo: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+    - name: Instalar pip
+      apt: name=python-setuptools state=present
+      apt: name=python-dev state=present 
+      apt: name=python-pip state=present
+    - name: Instalamos supervisor
+      apt: name=supervisor state=present
+    - name: Instalamos pyTelegramBotAPI
+      pip: name=pyTelegramBotAPI
+      #http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+      #Contraseña es hola
+    - name: Creamos usuario con contraseña y acceso sudo
+      user: name=user shell=/bin/bash group=sudo password=$6$8K/WYk4Ajov$j84F1tY4SSY0T46HEVw14lYgkaQKeXyIS/X0mtvBMVkxD5SRtcVuwGJ2Lbot2nh5DK/ZMsxrajHJANo1j.uc6.
+
+      
