@@ -37,6 +37,91 @@ La idea de este microservicio es que sea lo mas flexible posible, es decir, el u
 
 Como es natural, un estudiante universitario tiene muchos gastos. El objetivo de este microservicio es llevar un registro de lo gastado por el usuario a lo largo de un periodo de tiempo, 1 mes por ejemplo, y representar dichos gastos utilizando una serie de gráficos a elección del usuario. También será posible comparar los gastos con los de los meses anteriores. El usuario escribiría al bot diciendo: "Bus 5€ semana", el bot se pondría en contacto con este microservicio y los datos quedarían almacenados. Este microservicio tambíen se encarga de la creación de los gráficos comentandos anteriormente y de su envio al bot cuando este lo precise.
 
+
+## Provisionamiento
+
+### Puppet
+
+Se trata de un gestor de configuraciones escrito en ruby y ha sido elegido como gestor ya que se trata de unos de los principales y más [conocidos gestores de configuraciones](http://www.infoworld.com/article/2614204/data-center/puppet-or-chef--the-configuration-management-dilemma.html)
+
+Lo primero que debemos hacer es generar un fichero .pp indicando en él todo lo que queremos instalar sobre la máquina.
+
+~~~
+#Creamos un nuevo usuario
+
+user { 'usuario':
+  ensure  => 'present',
+  password => '$1$aJpM0z8S$g3hapJjj3yePnS8gRHYQ1/', #Generamos la clave con openssl y copiamos el resultado
+  comment => 'Comentario',
+  gid     => '100',
+  groups  => ['sudo', 'audio', 'src', 'video'],
+  home    => '/home/usuario',
+  shell   => '/bin/bash',
+  uid     => '1002',
+  managehome => yes,
+}
+
+#Instalamos pip
+
+package{ 'python-pip':
+  ensure => 'present',
+}
+
+#Instalamos pyTelegramBotAPI
+package { ['pyTelegramBotAPI==2.2.3']:
+
+  ensure => present,
+
+  provider => pip,
+
+  require => Package['python-pip'],
+
+}
+
+#Instalamos supervisor
+
+package{ 'supervisor':
+  ensure=>'present',
+}
+~~~
+
+Para que la contraseña se asocie correctamente con el usuario ha de generarse de la [siguiente manera](http://stackoverflow.com/questions/19114328/managing-a-user-password-for-linux-in-puppet):
+
+~~~
+openssl passwd -1
+~~~
+
+
+![](http://i64.tinypic.com/ou781v.png)
+
+El resultado de la ejecución del comando anterior ha de ser copiado en el parámetro `password` del fichero .pp
+
+Una vez hecho esto lo siguiente que debemos hacer es conectarnos via ssh con nuestra máquina.
+
+Dentro de nuestra máquina, instalamos puppet:
+
+`sudo apt-get install puppet`
+
+
+Después, descargamos el fichero .pp de este repositorio:
+
+`curl https://raw.githubusercontent.com/acasadoquijada/MyStudentBot/master/provision/default.pp > default.pp`
+
+
+Finalmente ejecutamos el fichero para aprovisionar la máquina:
+
+`sudo puppet apply default.pp`
+
+
+![2](http://i68.tinypic.com/2r6jy9u.png)
+
+En este caso podemos ver como se ha creado correctamente el usuario y como se han instalado pip3 y pyTelegramBotAPI
+
+
+
+
+
+
 ### Licencia
 
 La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
