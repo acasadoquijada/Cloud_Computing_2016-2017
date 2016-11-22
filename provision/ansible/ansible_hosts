@@ -1,2 +1,2 @@
 [aws]
-54.235.238.158 ansible_ssh_user='ubuntu'
+ip ansible_ssh_user='ubuntu'
