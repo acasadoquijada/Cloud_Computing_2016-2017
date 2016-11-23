@@ -98,14 +98,16 @@ El resultado de la ejecución del comando anterior ha de ser copiado en el pará
 
 Una vez hecho esto lo siguiente que debemos hacer es conectarnos via ssh con nuestra máquina.
 
-Dentro de nuestra máquina, instalamos puppet:
+Dentro de nuestra máquina, actualizamos repositorios e instalamos puppet:
 
+`sudo apt-get update`
+ 
 `sudo apt-get install puppet`
 
 
 Después, descargamos el fichero .pp de este repositorio:
 
-`curl https://raw.githubusercontent.com/acasadoquijada/MyStudentBot/master/provision/default.pp > default.pp`
+`curl https://raw.githubusercontent.com/acasadoquijada/MyStudentBot/master/provision/puppet/default.pp > default.pp`
 
 
 Finalmente ejecutamos el fichero para aprovisionar la máquina:
@@ -118,6 +120,8 @@ Finalmente ejecutamos el fichero para aprovisionar la máquina:
 En este caso podemos ver como se ha creado correctamente el usuario y como se han instalado pip y pyTelegramBotAPI
 
 ### Ansible
+
+He decidido utilizar ansible ya que se necesita python para su ejecución y viene instalado por defecto en la mayoría de los sistemas operativos
 
 Lo primero que debemos hacer es instalar ansible
 
