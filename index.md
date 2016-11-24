@@ -41,8 +41,155 @@ La idea de este microservicio es que sea lo mas flexible posible, es decir, el u
 
 Como es natural, un estudiante universitario tiene muchos gastos. El objetivo de este microservicio es llevar un registro de lo gastado por el usuario a lo largo de un periodo de tiempo, 1 mes por ejemplo, y representar dichos gastos utilizando una serie de gráficos a elección del usuario. También será posible comparar los gastos con los de los meses anteriores. El usuario escribiría al bot diciendo: "Bus 5€ semana", el bot se pondría en contacto con este microservicio y los datos quedarían almacenados. Este microservicio tambíen se encarga de la creación de los gráficos comentandos anteriormente y de su envio al bot cuando este lo precise.
 
+
+## Provisionamiento
+
+### Puppet
+
+Se trata de un gestor de configuraciones escrito en ruby y ha sido elegido como gestor ya que se trata de unos de los principales y más [conocidos gestores de configuraciones](http://www.infoworld.com/article/2614204/data-center/puppet-or-chef--the-configuration-management-dilemma.html)
+
+Lo primero que debemos hacer es generar un fichero .pp indicando en él todo lo que queremos instalar sobre la máquina.
+
+~~~
+#Creamos un nuevo usuario
+
+user { 'usuario':
+  ensure  => 'present',
+  password => '$1$aJpM0z8S$g3hapJjj3yePnS8gRHYQ1/', #Generamos la clave con openssl y copiamos el resultado
+  comment => 'Comentario',
+  gid     => '100',
+  groups  => ['sudo', 'audio', 'src', 'video'],
+  home    => '/home/usuario',
+  shell   => '/bin/bash',
+  uid     => '1002',
+  managehome => yes,
+}
+
+#Instalamos pip
+
+package{ 'python-pip':
+  ensure => 'present',
+}
+
+#Instalamos pyTelegramBotAPI
+package { ['pyTelegramBotAPI==2.2.3']:
+
+  ensure => present,
+
+  provider => pip,
+
+  require => Package['python-pip'],
+
+}
+
+#Instalamos supervisor
+
+package{ 'supervisor':
+  ensure=>'present',
+}
+~~~
+
+Para que la contraseña se asocie correctamente con el usuario ha de generarse de la [siguiente manera](http://stackoverflow.com/questions/19114328/managing-a-user-password-for-linux-in-puppet):
+
+~~~
+openssl passwd -1
+~~~
+
+
+![](http://i64.tinypic.com/ou781v.png)
+
+El resultado de la ejecución del comando anterior ha de ser copiado en el parámetro `password` del fichero .pp
+
+Una vez hecho esto lo siguiente que debemos hacer es conectarnos via ssh con nuestra máquina.
+
+Dentro de nuestra máquina, actualizamos repositorios e instalamos puppet:
+
+`sudo apt-get update`
+ 
+`sudo apt-get install puppet`
+
+
+Después, descargamos el fichero .pp de este repositorio:
+
+`curl https://raw.githubusercontent.com/acasadoquijada/MyStudentBot/master/provision/puppet/default.pp > default.pp`
+
+
+Finalmente ejecutamos el fichero para aprovisionar la máquina:
+
+`sudo puppet apply default.pp`
+
+
+![2](http://i68.tinypic.com/2r6jy9u.png)
+
+En este caso podemos ver como se ha creado correctamente el usuario y como se han instalado pip y pyTelegramBotAPI
+
+### Ansible
+
+He decidido utilizar ansible ya que se necesita python para su ejecución y viene instalado por defecto en la mayoría de los sistemas operativos
+
+Lo primero que debemos hacer es instalar ansible
+
+`sudo apt-get install ansible`
+
+Como en el caso anterior nos debemos crear un fichero con los paquetes a instalar e instrucciones a ejecutar.
+
+En este caso se llama `playbook.yml`
+
+~~~
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Actualizamos
+      apt: update_cache=yes
+    - name: Instalar pip
+      apt: name=python-setuptools state=present
+      apt: name=python-dev state=present 
+      apt: name=python-pip state=present
+    - name: Instalamos supervisor
+      apt: name=supervisor state=present
+    - name: Instalamos pyTelegramBotAPI
+      pip: name=pyTelegramBotAPI
+      #http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+      #Contraseña es hola
+    - name: Creamos usuario con contraseña y acceso sudo
+      user: name=user shell=/bin/bash group=admin password=$6$8K/WYk4Ajov$j84F1tY4SSY0T46HEVw14lYgkaQKeXyIS/X0mtvBMVkxD5SRtcVuwGJ2Lbot2nh5DK/ZMsxrajHJANo1j.uc6.
+~~~
+
+Para generar correctamente la contraseña ejecutamos
+
+`mkpasswd --method=sha-512`
+
+Y copiamos su salida en el campo `password` de `user:`
+
+Por otro lado hay que crear un fichero `ansible_hosts` con lo siguiente:
+
+~~~
+[aws]
+ip de la maquina ansible_ssh_user='ubuntu'
+~~~
+
+El último paso que debemos hacer antes de provisionar la máquina es generar la pareja de claves
+
+`aws ec2 create-key-pair --key-name MyKeyPair --query 'KeyMaterial' --output text > MyKeyPair.pem`
+
+Una vez realizados todos los preparativos procedemos a provisionar la máquina:
+
+`sudo ansible-playbook -i ansible_hosts --private-key parclave.pem -b playbook.yml`
+
+![3](http://i63.tinypic.com/9um2ol.png)
+
+
+
+
+
+
 ### Licencia
 
 La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
+
+
+
+
+
 
 
