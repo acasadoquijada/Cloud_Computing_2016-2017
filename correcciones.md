@@ -2,7 +2,7 @@
 layout: index
 ---
 
-##Provisionamiento usando ansible de @Gringer
+## Provisionamiento usando ansible de @Gringer
 
 La prueba de provisionamiento se ha realizado sobre una máquina Ubuntu 14 en AWS.
 
