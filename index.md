@@ -1,7 +1,6 @@
 ---
 layout: index
 ---
-
 # MyStudentBot
 
 ## Introducción
@@ -179,7 +178,94 @@ Una vez realizados todos los preparativos procedemos a provisionar la máquina:
 ![3](http://i63.tinypic.com/9um2ol.png)
 
 
+## Orquestación
 
+Para realizar la orquestación de las máquinas en aws vamos a utilizar [Vagrant](https://www.vagrantup.com/)
+
+Lo primero que debemos hacer es crear un fichero Vagrantfile. En mi caso es el siguiente:
+
+~~~
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+
+
+   config.vm.define "maquina_ansible" do |maquina_ansible|
+      maquina_ansible.vm.box = "aws"
+        maquina_ansible.vm.provider :aws do |aws, override|
+        aws.access_key_id = ENV['AWS_KEY']
+        aws.secret_access_key = ENV['AWS_SECRET']
+        aws.keypair_name = ENV['AWS_KEYNAME']
+
+        
+        aws.tags = {
+		    'Name' => 'Vagrant con ansible',
+		    'Environment' => 'vagrant-sandbox'
+        } 
+        
+        aws.region = "us-east-1"
+        aws.ami = "ami-1081b807"
+        aws.instance_type = "t2.micro"
+        aws.security_groups = ["vagrant"]
+        
+        override.ssh.username = "ubuntu"  #ec2-user
+        override.ssh.private_key_path = ENV['AWS_KEYPATH']
+      end
+        
+      maquina_ansible.vm.provision :ansible do |ansible|
+        ansible.playbook = "playbook.yml"
+      end
+   end
+
+   config.vm.define "maquina_chef" do |maquina_chef|
+      maquina_chef.vm.box = "aws"
+        maquina_chef.vm.provider :aws do |aws, override|
+        aws.access_key_id = ENV['AWS_KEY']
+        aws.secret_access_key = ENV['AWS_SECRET']
+        aws.keypair_name = ENV['AWS_KEYNAME']
+
+        
+        aws.tags = {
+		    'Name' => 'Vagrant con chef',
+		    'Environment' => 'vagrant-sandbox'
+        } 
+        
+        aws.region = "us-east-1"
+        aws.ami = "ami-1081b807"
+        aws.instance_type = "t2.micro"
+        aws.security_groups = ["vagrant"]
+        
+        override.ssh.username = "ubuntu"  #ec2-user
+        override.ssh.private_key_path = ENV['AWS_KEYPATH']
+      end
+        
+      maquina_chef.vm.provision "chef_solo" do |chef|
+        chef.add_recipe "mystudentbot"
+      end
+   end
+
+
+end
+~~~
+
+En este fichero de configuración de Vagrant creamos y provisionamos dos máquinas, una de ellas ha sido provisionada con el script de ansible creado anteriormente y la otra utilizando chef.
+
+Ahora vamos a explicar como levantar las máquinas y provisionarlas.
+
+Basta con ejecutar `vagrant up --provider=aws` para que comience el proceso
+
+
+![imagen](http://i68.tinypic.com/2u53wpv.png)
+
+![imagen2](http://i64.tinypic.com/fblrft.png)
+
+Una vez hecho esto, ya dispondremos de nuestra máquinas listas en aws
+
+![imagen3](http://i66.tinypic.com/1z3nwcm.png)
 
 
 
