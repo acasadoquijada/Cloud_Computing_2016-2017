@@ -269,7 +269,7 @@ Una vez hecho esto, ya dispondremos de nuestra máquinas listas en aws
 
 
 
-##Contenedores
+## Contenedores
 
 Como gestor de contenedores he utilizado [docker](https://www.docker.com/) debido a su comunidad y a su facilidad de uso.
 
