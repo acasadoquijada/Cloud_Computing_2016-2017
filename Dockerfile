@@ -1,14 +1,14 @@
-FROM ubuntu:14.04
+FROM ubuntu:latest
 MAINTAINER Alejandro Casado Quijada <acasadoquijada@gmail.com>
 
-RUN sudo apt-get update
-RUN sudo apt-get upgrade
-RUN sudo apt-get install python-dev
-RUN sudo apt-get install python-pip
-RUN sudo apt-get install supervisor
-RUN sudo pip install pyTelegramBotAPI
+RUN apt-get -y update
+RUN apt-get -y install python-setuptools
+RUN apt-get -y install python-dev
+RUN apt-get -y install python-pip
+RUN apt-get -y install supervisor
+RUN pip install pyTelegramBotAPI
 
-RUN useradd -ms /bin/bash usuario
+RUN useradd -m docker && echo "docker:docker" 
 
-USER usuario
-WORKDIR /home/usuario
+USER docker
+CMD /bin/bash
