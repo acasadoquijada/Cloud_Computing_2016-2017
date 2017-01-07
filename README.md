@@ -272,6 +272,23 @@ Como gestor de contenedores he utilizado [docker](https://www.docker.com/) debid
 
 Ahora vamos a explicar como generar un contenedor con una imagen, instalando en ella lo necesario y subir dicha imagen a dockerhub para que otros usuarios puedan utilizarla.
 
+Para generar nuestro contenedor en dockerhub lo primero que debemos de hacer es de colocar un fichero [Dockerfile](https://github.com/acasadoquijada/MyStudentBot/blob/master/Dockerfile) con todo lo necesario en la raíz de la rama master de nuestro repositorio.
+
+Una vez hecho esto hay que registrarse en dicha web y añadir nuestro repositorio. Con esto, deberá comenzar la creación de nuestro contenedor en dockerhub.
+
+Cuando este generado, todo el mundo podra descargarlo en su equipo para probarlo.
+
+Para descargar mi contenedor debemos usar:
+
+`docker pull acasadoquijada/mystudentbot`
+
+Y para conectar:
+
+`sudo docker run -t -i acasadoquijada/mystudentbot`
+
+
+
+
 
 
 ### Licencia
