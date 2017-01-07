@@ -269,15 +269,30 @@ Una vez hecho esto, ya dispondremos de nuestra máquinas listas en aws
 
 
 
+##Contenedores
+
+Como gestor de contenedores he utilizado [docker](https://www.docker.com/) debido a su comunidad y a su facilidad de uso.
+
+Ahora vamos a explicar como generar un contenedor con una imagen, instalando en ella lo necesario y subir dicha imagen a Docker Hub para que otros usuarios puedan utilizarla.
+
+Para generar nuestro contenedor en dockerhub lo primero que debemos de hacer es de colocar un fichero [Dockerfile](https://github.com/acasadoquijada/MyStudentBot/blob/master/Dockerfile) con todo lo necesario en la raíz de la rama master de nuestro repositorio.
+
+Una vez hecho esto hay que registrarse en dicha web y añadir nuestro repositorio. Con esto, deberá comenzar la creación de nuestro contenedor en Docker Hub.
+
+Cuando este generado, todo el mundo podra descargarlo en su equipo para probarlo. El enlace de mi contenedor puede ser consultado [aquí](https://hub.docker.com/r/acasadoquijada/mystudentbot/)
+
+Para descargar mi contenedor debemos usar:
+
+`docker pull acasadoquijada/mystudentbot`
+
+Y para conectar:
+
+`sudo docker run -t -i acasadoquijada/mystudentbot`
+
+
 ### Licencia
 
 La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
-
-
-
-
-
-
 
 
 
