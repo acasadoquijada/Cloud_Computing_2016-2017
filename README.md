@@ -266,6 +266,14 @@ Una vez hecho esto, ya dispondremos de nuestra máquinas listas en aws
 
 
 
+##Contenedores
+
+Como gestor de contenedores he utilizado [docker](https://www.docker.com/) debido a su comunidad y a su facilidad de uso.
+
+Ahora vamos a explicar como generar un contenedor con una imagen, instalando en ella lo necesario y subir dicha imagen a dockerhub para que otros usuarios puedan utilizarla.
+
+
+
 ### Licencia
 
 La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
