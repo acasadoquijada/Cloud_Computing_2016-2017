@@ -4,7 +4,7 @@ layout: index
 
 ## Correcciones
 
-### Provisionamiento usando ansible de @Gringer
+### Provisionamiento usando ansible de @Griger
 
 La prueba de provisionamiento se ha realizado sobre una máquina Ubuntu 14 en AWS.
 

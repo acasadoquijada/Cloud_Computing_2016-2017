@@ -2,7 +2,7 @@
 layout: index
 ---
 
-### Corrección @Gringer
+### Corrección @Griger
 
 Para probar los contenedores se ha ejecutado el [script](https://github.com/Griger/CC/blob/master/dockerfiles/scriptDescargayCracion.sh) que se encarga de descargar y lanzar los distintos contenedores.
 
