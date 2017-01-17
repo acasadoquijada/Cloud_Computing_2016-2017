@@ -3,7 +3,7 @@ layout: index
 ---
 
 
-##Corrección de @mmaguero
+## Corrección de @mmaguero
 
 Comenzamos la correción probando Vagrant y Virtualbox.
 
