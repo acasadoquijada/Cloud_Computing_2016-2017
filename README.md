@@ -300,7 +300,7 @@ Nos ofrece un plan gratuito de hasta 500 MB de capacidad, lo que es más que suf
 
 Una vez registrados, debemos configurar nuestra BD y obtendremos la siguiente información:
 
-![mongo]()
+![mongo](http://i1045.photobucket.com/albums/b460/Alejandro_Casado/mlab_zpsmtgq085o.png)
 
 Para utilizarla, debemos instalar la libreria [mlab](https://pypi.python.org/pypi/mlab) en python.
 
@@ -320,35 +320,24 @@ Hay gran cantidad de servicios de log como [logz.io](http://logz.io/) o [papertr
 
 Su funcionamiento es muy sencillo, basta con registrarse, seleccionar el sistema que estamos usando y [configurar nuestra aplicación](http://help.papertrailapp.com/kb/configuration/configuring-centralized-logging-from-python-apps/)
 
-![log]()
+![log](http://i64.tinypic.com/29auuqf.png)
 
 Las librerias necesarias para el uso del sistema de log, `logging` y `socket`, vienen instaladas por defecto en python, por lo que no es necesario instalarlas
 
 Para cada uno de dichos servicios se ha creado su correspondiente contenedor docker:
 
-El primero, correspondiente al bot, es el mismo en realizado en prácticas anteriores.
-
-* Contenedor bot. El realizado en prácticas anteriores
-* Contenedor académico-tareas
-* Contenedor gastos
+* [Contenedor bot](https://hub.docker.com/r/acasadoquijada/mystudentbot/). El realizado en prácticas anteriores
+* [Contenedor académico-tareas](https://hub.docker.com/r/acasadoquijada/mystudentbot-academico-gestion/)
+* [Contenedor gastos](https://hub.docker.com/r/acasadoquijada/mystudentbot-gastos/)
 
 Estos contenedores son los que se desplegarán en AWS utilizando Vagrant.
 
-Para ello debemos configurar el fichero Vagrantfile correctamente, como hicimos anteriormente pero con ligeras modificaciones.
-
 Nota: Mucho cuidado con las claves de AWS, es VITAL usarlas bien para evitar problemas.
 
+Ahora que sabemos el funcionamiento de los distintos microservicios y sus contenedores asociados generamos los playbook necesarios y el correspondiente Vagrantfile.
 
-
-
+Finalmente usamos `vagrant up --provider=aws` para desplegar todas las máquinas.
 
 ### Licencia
 
 La licencia usada en el proyecto es [GNU GLP V3](https://github.com/acasadoquijada/MyStudentBot/blob/master/LICENSE)
-
-
-
-
-
-
-
