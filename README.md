@@ -286,6 +286,61 @@ Y para conectar:
 
 `sudo docker run -t -i acasadoquijada/mystudentbot`
 
+## Despliegue
+
+Este proyecto cuenta de 3 microservicios, aunque 2 de ellos (gestión de tareas y gestión academica) pueden unificarse en 1 ,a parte del propio bot, que puede considerarse como otro.
+
+Una vez explicado lo anterior, vamos a prodecer a explicar el despliegue:
+
+### Gestión académica y de tareas.
+
+Este microservicio necesita una base de datos MongoDB, aunque gestión académica utilizaba en un principio una BD sql .La elegida ha sido [mLab](https://mlab.com/).
+
+Nos ofrece un plan gratuito de hasta 500 MB de capacidad, lo que es más que suficiente para este microservicio.
+
+Una vez registrados, debemos configurar nuestra BD y obtendremos la siguiente información:
+
+![mongo]()
+
+Para utilizarla, debemos instalar la libreria [mlab](https://pypi.python.org/pypi/mlab) en python.
+
+El provisionamiento para este microservicio debe ser modificado para añadir dicha libreria.
+
+### Gestión de gastos.
+
+Volvemos a necesitar una base de datos MongoDB, por lo que debemos repetir los pasos anteriores.
+
+También hemos de modificar el provisionamiento para poder generar los distintos gráficos. Para generarlos se va a usar la librería [ploty](https://pypi.python.org/pypi/plotly) ya que dispone de una gran cantidad de tutoriales y comunidad apoyandala, también es muy fácil de usar.
+
+### Bot.
+
+Este microservicio es el que interacciona con el usuario, por lo que es natural pensar que debe disponer de un servicio de log. Para mayor fiabilidad mejor praxis, vamos a utilizar un servicio externo para tal necesidad.
+
+Hay gran cantidad de servicios de log como [logz.io](http://logz.io/) o [papertrail](https://papertrailapp.com/). Nos hemos decantado por este último.
+
+Su funcionamiento es muy sencillo, basta con registrarse, seleccionar el sistema que estamos usando y [configurar nuestra aplicación](http://help.papertrailapp.com/kb/configuration/configuring-centralized-logging-from-python-apps/)
+
+![log]()
+
+Las librerias necesarias para el uso del sistema de log, `logging` y `socket`, vienen instaladas por defecto en python, por lo que no es necesario instalarlas
+
+Para cada uno de dichos servicios se ha creado su correspondiente contenedor docker:
+
+El primero, correspondiente al bot, es el mismo en realizado en prácticas anteriores.
+
+* Contenedor bot. El realizado en prácticas anteriores
+* Contenedor académico-tareas
+* Contenedor gastos
+
+Estos contenedores son los que se desplegarán en AWS utilizando Vagrant.
+
+Para ello debemos configurar el fichero Vagrantfile correctamente, como hicimos anteriormente pero con ligeras modificaciones.
+
+Nota: Mucho cuidado con las claves de AWS, es VITAL usarlas bien para evitar problemas.
+
+
+
+
 
 ### Licencia
 
