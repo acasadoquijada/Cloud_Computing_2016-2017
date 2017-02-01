@@ -334,7 +334,7 @@ Estos contenedores son los que se desplegarán en AWS utilizando Vagrant.
 
 Nota: Mucho cuidado con las claves de AWS, es VITAL usarlas bien para evitar problemas.
 
-Ahora que sabemos el funcionamiento de los distintos microservicios y sus contenedores asociados generamos los playbook necesarios y el correspondiente Vagrantfile.
+Ahora que sabemos el funcionamiento de los distintos microservicios y sus contenedores asociados generamos los [playbook necesarios](https://github.com/acasadoquijada/MyStudentBot/tree/master/despliegue/Playbooks) y el correspondiente [Vagrantfile](https://github.com/acasadoquijada/MyStudentBot/blob/master/despliegue/Vagrantfile).
 
 Finalmente usamos `vagrant up --provider=aws` para desplegar todas las máquinas.
 
